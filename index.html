@@ -9,6 +9,12 @@
     <link rel="canonical" href="https://www.dagarfoundation.org/">
     <title>Dagar Foundation | Empowering Communities, Preserving Nature</title>
     
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo.png">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,18 +38,22 @@
             
             <nav class="nav-menu" id="nav-menu">
                 <ul>
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#about" class="nav-link">About Us</a></li>
-                    <li><a href="#missions" class="nav-link">Our Missions</a></li>
-                    <li><a href="#approach" class="nav-link">Our Approach</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                    <li><a href="/" class="nav-link active">Home</a></li>
+                    <li><a href="/about.html" class="nav-link">About Us</a></li>
+                    <li><a href="/missions.html" class="nav-link">Our Missions</a></li>
+                    <li><a href="/approach.html" class="nav-link">Our Approach</a></li>
+                    <li><a href="/blog.html" class="nav-link">Blog & Stories</a></li>
+                    <li><a href="/contact.html" class="nav-link">Contact</a></li>
                 </ul>
             </nav>
             
             <div class="header-actions">
-                <a href="#donate" class="btn btn-primary btn-donate" id="header-donate-btn">
+                <a href="/donate.html" class="btn btn-primary btn-donate" id="header-donate-btn">
                     <span>Donate Now</span>
                     <i class="fa-solid fa-heart"></i>
+                </a>
+                <a href="/admin" class="btn btn-outline btn-sm" style="margin-left: 8px;" title="Admin CMS Portal">
+                    <i class="fa-solid fa-lock"></i>
                 </a>
                 <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
                     <span class="bar"></span>
@@ -64,8 +74,8 @@
                     <h1 class="hero-title">Shaping a Brighter, More Equitable Future</h1>
                     <p class="hero-description">We are dedicated to addressing critical societal, environmental, and economic challenges. Through focus on environmental safety, education, and well-being, we build lasting change in underprivileged communities.</p>
                     <div class="hero-actions">
-                        <a href="#donate" class="btn btn-primary btn-lg" id="hero-cta-donate">Support Our Cause</a>
-                        <a href="#about" class="btn btn-outline btn-lg" id="hero-cta-learn">Explore Our Work</a>
+                        <a href="/donate.html" class="btn btn-primary btn-lg" id="hero-cta-donate">Support Our Cause</a>
+                        <a href="/about.html" class="btn btn-outline btn-lg" id="hero-cta-learn">Explore Our Work</a>
                     </div>
                 </div>
                 <div class="hero-visual">
@@ -365,6 +375,26 @@
             </div>
         </section>
 
+        <!-- Latest Insights & Stories / Blog Preview Section -->
+        <section class="blog-preview-section section-padding" id="blog-preview" style="background: #ffffff;">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="sub-title">From Our Field Desks</span>
+                    <h2 class="section-title">Latest Insights & Stories</h2>
+                    <div class="header-line"></div>
+                </div>
+                <div class="blog-cards-grid" id="homepage-blog-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 36px;">
+                    <!-- Dynamically populated from /api/blogs -->
+                </div>
+                <div class="text-center" style="margin-top: 40px;">
+                    <a href="/blog.html" class="btn btn-outline btn-lg" id="view-all-blogs-btn">
+                        <span>Explore All Articles & Field Reports</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section class="contact-section section-padding" id="contact">
             <div class="container">
@@ -465,7 +495,8 @@
                     <li><a href="#home">Home</a></li>
                     <li><a href="#about">About Us</a></li>
                     <li><a href="#missions">Our Missions</a></li>
-                    <li><a href="#approach">Our Approach</a></li>
+                    <li><a href="/blog.html">Blog & Stories</a></li>
+                    <li><a href="#donate">Donate Now</a></li>
                     <li><a href="#contact">Contact Us</a></li>
                 </ul>
             </div>
@@ -482,7 +513,7 @@
         <div class="footer-bottom">
             <div class="container footer-bottom-container">
                 <p>&copy; 2026 Dagar Foundation. All rights reserved. Registered NGO.</p>
-                <p>Website: <a href="https://www.dagarfoundation.org">www.dagarfoundation.org</a></p>
+                <p>Website: <a href="https://www.dagarfoundation.org">www.dagarfoundation.org</a> | <a href="/admin" style="color: var(--primary); font-weight: 600;"><i class="fa-solid fa-shield-halved"></i> Admin Portal</a></p>
             </div>
         </div>
     </footer>

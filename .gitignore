@@ -1,0 +1,13 @@
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Temporary files & DB backup
+*.tmp
+*.log
+
+# Uploads directory (optional local user media)
+uploads/upload_*

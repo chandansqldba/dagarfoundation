@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagar Foundation - Executive Admin CMS & SEO Portal</title>
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Admin CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+    <!-- Auth Login Overlay Screen -->
+    <div class="auth-wrapper" id="auth-screen">
+        <div class="auth-card">
+            <div class="auth-logo">
+                <img src="logo.png" alt="Dagar Foundation Logo">
+                <span>DAGAR <small>FOUNDATION</small></span>
+            </div>
+            <div class="auth-header">
+                <h2>Admin Control Center</h2>
+                <p>Sign in to manage website content, blogs & SEO tags</p>
+            </div>
+            <form id="admin-login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-username">Username or Email</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="login-username" placeholder="admin" required autocomplete="username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <div class="input-with-icon">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password" style="padding-right: 40px;">
+                        <button type="button" id="toggle-pwd-visibility" style="position: absolute; right: 12px; background: none; border: none; color: var(--adm-text-dim); cursor: pointer; padding: 4px;" title="Show/Hide Password">
+                            <i class="fa-regular fa-eye" id="toggle-pwd-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit" class="auth-btn" id="login-submit-btn">
+                    <span>Sign In to Dashboard</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div class="auth-hint">
+                    <i class="fa-solid fa-shield-halved"></i> Default Credentials: <strong>admin</strong> / <strong>admin123</strong>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin App Layout -->
+    <div class="admin-layout" id="admin-app" style="display: none;">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="admin-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="logo.png" alt="Logo" class="sidebar-logo-img">
+                <div class="sidebar-logo-title">
+                    DAGAR <span>CMS & SEO PORTAL</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Control</div>
+                <ul class="sidebar-menu">
+                    <li class="menu-item">
+                        <a class="menu-link active" data-view="dashboard">
+                            <i class="fa-solid fa-chart-pie"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="seo">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i>
+                            <span>SEO & Meta Tags</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="blogs">
+                            <i class="fa-solid fa-newspaper"></i>
+                            <span>Blog Articles</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="content">
+                            <i class="fa-solid fa-sliders"></i>
+                            <span>Site Content</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">Communications</div>
+                <ul class="sidebar-menu">
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="messages">
+                            <i class="fa-solid fa-envelope-open-text"></i>
+                            <span>Inquiries / Leads</span>
+                            <span class="menu-badge" id="sidebar-unread-badge" style="display: none;">0</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="subscribers">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Subscribers</span>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="media">
+                            <i class="fa-solid fa-images"></i>
+                            <span>Media Uploads</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="nav-section-title">Administration</div>
+                <ul class="sidebar-menu">
+                    <li class="menu-item">
+                        <a class="menu-link" data-view="settings">
+                            <i class="fa-solid fa-gear"></i>
+                            <span>Settings & Security</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile-summary">
+                    <div class="user-avatar" id="sidebar-user-avatar">A</div>
+                    <div class="user-info-text">
+                        <div class="user-name" id="sidebar-user-name">Admin</div>
+                        <div class="user-role">Super Administrator</div>
+                    </div>
+                </div>
+                <button class="btn-icon-logout" id="logout-btn" title="Sign Out">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="admin-main">
+            <!-- Top Sticky Header -->
+            <header class="admin-header">
+                <div class="header-left">
+                    <button class="sidebar-toggle-btn" id="sidebar-toggle">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <div>
+                        <h2 class="page-header-title" id="top-header-title">Dashboard Overview</h2>
+                        <span class="page-header-subtitle" id="top-header-subtitle">Welcome back, manage your foundation portal</span>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <a href="/" target="_blank" class="btn-view-site">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        <span>Live Site</span>
+                    </a>
+                    <a href="/blog.html" target="_blank" class="btn-view-site">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Blog Hub</span>
+                    </a>
+                    <button class="btn-primary-action" id="header-new-blog-btn">
+                        <i class="fa-solid fa-plus"></i>
+                        <span>New Article</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic Views Container -->
+            <div class="admin-content">
+
+                <!-- 1. DASHBOARD VIEW -->
+                <section class="admin-view active" id="view-dashboard">
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-blogs"><i class="fa-solid fa-newspaper"></i></div>
+                            <div class="metric-details">
+                                <h3 id="stat-total-blogs">0</h3>
+                                <p>Published Articles</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-views"><i class="fa-solid fa-eye"></i></div>
+                            <div class="metric-details">
+                                <h3 id="stat-total-views">0</h3>
+                                <p>Total Article Views</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-messages"><i class="fa-solid fa-envelope"></i></div>
+                            <div class="metric-details">
+                                <h3 id="stat-total-messages">0</h3>
+                                <p>Inquiries (<span id="stat-unread-messages">0</span> unread)</p>
+                            </div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-icon-wrap icon-subscribers"><i class="fa-solid fa-users"></i></div>
+                            <div class="metric-details">
+                                <h3 id="stat-total-subscribers">0</h3>
+                                <p>Newsletter Subscribers</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-split-grid">
+                        <!-- Recent Messages Panel -->
+                        <div class="dash-panel">
+                            <div class="panel-header">
+                                <h3><i class="fa-solid fa-inbox text-primary"></i> Recent Messages</h3>
+                                <a href="#" data-switch-view="messages">View All Messages</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="adm-table" id="dashboard-messages-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sender</th>
+                                            <th>Subject</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="dashboard-messages-tbody">
+                                        <!-- Loaded via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Quick Control & Activity Panel -->
+                        <div class="dash-panel">
+                            <div class="panel-header">
+                                <h3><i class="fa-solid fa-bolt text-accent"></i> Quick SEO & Actions</h3>
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+                                <button class="btn-view-site" style="justify-content: flex-start;" data-switch-view="seo">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-primary"></i>
+                                    <span>Edit Homepage SEO & Meta Tags</span>
+                                </button>
+                                <button class="btn-view-site" style="justify-content: flex-start;" data-switch-view="content">
+                                    <i class="fa-solid fa-sliders text-accent"></i>
+                                    <span>Update Trees & Impact Counters</span>
+                                </button>
+                                <button class="btn-view-site" style="justify-content: flex-start;" data-switch-view="content" data-content-tab="donation">
+                                    <i class="fa-solid fa-qrcode text-warning"></i>
+                                    <span>Change Donation UPI & Allocations</span>
+                                </button>
+                            </div>
+
+                            <div class="panel-header" style="margin-top: 10px;">
+                                <h3><i class="fa-solid fa-clock-rotate-left"></i> System Activity Log</h3>
+                            </div>
+                            <ul id="dashboard-activity-list" style="list-style: none; font-size: 0.82rem; color: var(--adm-text-muted); display: flex; flex-direction: column; gap: 10px;">
+                                <!-- Loaded via JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 2. SEO & META TAGS MANAGER VIEW -->
+                <section class="admin-view" id="view-seo">
+                    <!-- Page Selector Navigation -->
+                    <div class="seo-page-selector">
+                        <label><i class="fa-solid fa-globe text-primary"></i> Select Page to Configure:</label>
+                        <button class="seo-tab-btn active" data-page="home">Homepage (/)</button>
+                        <button class="seo-tab-btn" data-page="about">About Us (/about.html)</button>
+                        <button class="seo-tab-btn" data-page="missions">Missions (/missions.html)</button>
+                        <button class="seo-tab-btn" data-page="approach">Our Approach (/approach.html)</button>
+                        <button class="seo-tab-btn" data-page="blog">Blog Hub (/blog.html)</button>
+                        <button class="seo-tab-btn" data-page="contact">Contact (/contact.html)</button>
+                        <button class="seo-tab-btn" data-page="donate">Donate (/donate.html)</button>
+                        <button class="seo-tab-btn" data-page="global">Global SEO & Schema.org</button>
+                    </div>
+
+                    <div class="seo-manager-grid">
+                        <!-- Left Form: SEO Inputs -->
+                        <div class="seo-form-card">
+                            <div class="panel-header">
+                                <h3 id="seo-editing-heading">Configuring SEO for: Homepage</h3>
+                                <button class="btn-primary-action" id="save-seo-btn">
+                                    <i class="fa-solid fa-floppy-disk"></i> Save SEO Meta Tags
+                                </button>
+                            </div>
+
+                            <form id="seo-meta-form">
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <span>Meta Title Tag <strong class="text-danger">*</strong></span>
+                                        <span class="char-count-badge" id="title-char-count">0 / 60 chars</span>
+                                    </div>
+                                    <input type="text" id="seo-input-title" class="form-input" placeholder="Page Title (e.g. Dagar Foundation | Empowering Communities)" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <span>Meta Description <strong class="text-danger">*</strong></span>
+                                        <span class="char-count-badge" id="desc-char-count">0 / 160 chars</span>
+                                    </div>
+                                    <textarea id="seo-input-desc" class="form-textarea" rows="3" placeholder="Compelling summary shown in Google search results..."></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Meta Keywords (Comma separated)</label>
+                                    <input type="text" id="seo-input-keywords" class="form-input" placeholder="NGO, education, tree plantation, charity India">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Canonical URL</label>
+                                    <input type="url" id="seo-input-canonical" class="form-input" placeholder="https://www.dagarfoundation.org/">
+                                </div>
+
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                    <div class="form-group">
+                                        <label class="form-label">Robots Indexing</label>
+                                        <select id="seo-input-robots" class="form-select">
+                                            <option value="index, follow">index, follow (Default - Recommended)</option>
+                                            <option value="noindex, follow">noindex, follow</option>
+                                            <option value="index, nofollow">index, nofollow</option>
+                                            <option value="noindex, nofollow">noindex, nofollow</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label">Social Share Image (OG Image)</label>
+                                        <input type="text" id="seo-input-ogimage" class="form-input" placeholder="/logo.png or image URL">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Open Graph (Social) Title</label>
+                                    <input type="text" id="seo-input-ogtitle" class="form-input" placeholder="Title when shared on Facebook / WhatsApp / LinkedIn">
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Open Graph Description</label>
+                                    <textarea id="seo-input-ogdesc" class="form-textarea" rows="2" placeholder="Description for social link previews"></textarea>
+                                </div>
+
+                                <!-- Extra Global Settings block (shown only when 'global' selected) -->
+                                <div id="global-seo-extra-fields" style="display: none; border-top: 1px solid var(--adm-border); padding-top: 18px; margin-top: 18px;">
+                                    <h4 style="margin-bottom: 12px; font-size: 1rem; color: var(--adm-accent);">
+                                        <i class="fa-solid fa-code"></i> Structured Data (Schema.org JSON-LD)
+                                    </h4>
+                                    <p style="font-size: 0.8rem; color: var(--adm-text-muted); margin-bottom: 10px;">
+                                        Google uses this JSON-LD schema to understand organization metadata, phone numbers, and official social links.
+                                    </p>
+                                    <div class="form-group">
+                                        <textarea id="seo-input-schema" class="form-textarea" rows="8" style="font-family: monospace; font-size: 0.85rem;"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Right Column: Real-Time Previews -->
+                        <div class="seo-preview-card">
+                            <div class="panel-header">
+                                <h3><i class="fa-brands fa-google text-warning"></i> Live Google Search Result Preview</h3>
+                            </div>
+                            <p style="font-size: 0.8rem; color: var(--adm-text-muted); margin-bottom: 12px;">
+                                See how this page appears in Google desktop & mobile search snippets in real-time as you edit:
+                            </p>
+                            
+                            <div class="serp-preview-box">
+                                <div class="serp-url-row">
+                                    <img src="logo.png" alt="Favicon" class="serp-favicon">
+                                    <div>
+                                        <span style="font-weight: 500;">Dagar Foundation</span>
+                                        <span style="color: #5f6368; margin-left: 4px;" id="serp-preview-url">https://www.dagarfoundation.org</span>
+                                    </div>
+                                </div>
+                                <h3 class="serp-title" id="serp-preview-title">Dagar Foundation | Empowering Communities, Preserving Nature</h3>
+                                <p class="serp-desc" id="serp-preview-desc">Dagar Foundation is a non-governmental organization dedicated to environmental safety, education for all, and child mental health.</p>
+                            </div>
+
+                            <div class="panel-header" style="margin-top: 28px;">
+                                <h3><i class="fa-solid fa-share-nodes text-accent"></i> Social Share Card Preview</h3>
+                            </div>
+                            <div class="social-preview-box">
+                                <img src="logo.png" alt="OG Preview Image" class="social-preview-img" id="social-preview-img">
+                                <div class="social-preview-content">
+                                    <div class="social-preview-domain">DAGARFOUNDATION.ORG</div>
+                                    <div class="social-preview-title" id="social-preview-title">Dagar Foundation | Empowering Communities</div>
+                                    <div class="social-preview-desc" id="social-preview-desc">Together for a better tomorrow. Join our active grassroots missions.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 3. BLOG ARTICLES MANAGER VIEW -->
+                <section class="admin-view" id="view-blogs">
+                    <div class="dash-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h3><i class="fa-solid fa-newspaper text-primary"></i> Published & Draft Articles</h3>
+                                <p style="font-size: 0.8rem; color: var(--adm-text-muted);">Manage your foundation news, field reports, and educational articles</p>
+                            </div>
+                            <button class="btn-primary-action" id="open-new-blog-modal-btn">
+                                <i class="fa-solid fa-plus"></i> Write New Article
+                            </button>
+                        </div>
+
+                        <!-- Filter Bar -->
+                        <div style="display: flex; gap: 14px; margin-bottom: 20px; flex-wrap: wrap;">
+                            <input type="text" id="blog-search-input" class="form-input" placeholder="Search by title, keyword, or excerpt..." style="max-width: 350px;">
+                            <select id="blog-category-filter" class="form-select" style="max-width: 200px;">
+                                <option value="">All Categories</option>
+                                <option value="Environment">Environment</option>
+                                <option value="Education">Education</option>
+                                <option value="Child Mental Health">Child Mental Health</option>
+                                <option value="Farmer Welfare">Farmer Welfare</option>
+                            </select>
+                            <select id="blog-status-filter" class="form-select" style="max-width: 160px;">
+                                <option value="">All Statuses</option>
+                                <option value="published">Published</option>
+                                <option value="draft">Drafts</option>
+                            </select>
+                        </div>
+
+                        <!-- Blog Table -->
+                        <div class="table-responsive">
+                            <table class="adm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Article Title</th>
+                                        <th>Category</th>
+                                        <th>Author</th>
+                                        <th>Date</th>
+                                        <th>Views</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="blogs-table-tbody">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. SITE CONTENT & SECTIONS MANAGER VIEW -->
+                <section class="admin-view" id="view-content">
+                    <div class="dash-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h3><i class="fa-solid fa-sliders text-accent"></i> Frontend Website Content Manager</h3>
+                                <p style="font-size: 0.8rem; color: var(--adm-text-muted);">Edit any headline, statistic, mission, or contact detail across the website</p>
+                            </div>
+                            <button class="btn-primary-action" id="save-all-content-btn">
+                                <i class="fa-solid fa-floppy-disk"></i> Save Content Updates
+                            </button>
+                        </div>
+
+                        <!-- Content Sections Tabs -->
+                        <div class="seo-page-selector" style="margin-bottom: 24px;">
+                            <button class="seo-tab-btn active" data-content-tab="branding">Branding & Contact</button>
+                            <button class="seo-tab-btn" data-content-tab="hero">Hero Section</button>
+                            <button class="seo-tab-btn" data-content-tab="stats">Impact Counters</button>
+                            <button class="seo-tab-btn" data-content-tab="about">About Section</button>
+                            <button class="seo-tab-btn" data-content-tab="missions">Core Missions</button>
+                            <button class="seo-tab-btn" data-content-tab="approach">Our Approach</button>
+                            <button class="seo-tab-btn" data-content-tab="contact">Contact & FAQs</button>
+                            <button class="seo-tab-btn" data-content-tab="donation">Donation & Banking</button>
+                        </div>
+
+                        <!-- Content Panels -->
+                        <div id="content-tab-branding" class="content-tab-pane">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Foundation Name</label>
+                                    <input type="text" id="cnt-brand-name" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Tagline</label>
+                                    <input type="text" id="cnt-brand-tagline" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Contact Email</label>
+                                    <input type="email" id="cnt-brand-email" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Contact Phone</label>
+                                    <input type="text" id="cnt-brand-phone" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Office Address</label>
+                                    <input type="text" id="cnt-brand-address" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Official Website URL</label>
+                                    <input type="url" id="cnt-brand-website" class="form-input">
+                                </div>
+                            </div>
+                            <h4 style="margin: 20px 0 10px; color: var(--adm-text-main);">Social Media Profiles</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                                <div class="form-group"><label class="form-label">Facebook</label><input type="url" id="cnt-social-fb" class="form-input"></div>
+                                <div class="form-group"><label class="form-label">Twitter / X</label><input type="url" id="cnt-social-tw" class="form-input"></div>
+                                <div class="form-group"><label class="form-label">Instagram</label><input type="url" id="cnt-social-ig" class="form-input"></div>
+                                <div class="form-group"><label class="form-label">LinkedIn</label><input type="url" id="cnt-social-li" class="form-input"></div>
+                            </div>
+                        </div>
+
+                        <div id="content-tab-hero" class="content-tab-pane" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">Hero Badge Text</label>
+                                <input type="text" id="cnt-hero-badge" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Hero Main Title (H1)</label>
+                                <input type="text" id="cnt-hero-title" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Hero Lead Description</label>
+                                <textarea id="cnt-hero-desc" class="form-textarea" rows="4"></textarea>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Primary Button Text & Link</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="text" id="cnt-hero-btn1-txt" class="form-input" placeholder="Text">
+                                        <input type="text" id="cnt-hero-btn1-link" class="form-input" placeholder="Link (e.g. #donate)">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Secondary Button Text & Link</label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="text" id="cnt-hero-btn2-txt" class="form-input" placeholder="Text">
+                                        <input type="text" id="cnt-hero-btn2-link" class="form-input" placeholder="Link (e.g. #about)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="content-tab-stats" class="content-tab-pane" style="display: none;">
+                            <p style="font-size: 0.85rem; color: var(--adm-text-muted); margin-bottom: 20px;">
+                                Update the live numbers displayed on the homepage counter section:
+                            </p>
+                            <div id="stats-cards-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <div id="content-tab-about" class="content-tab-pane" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">About Subtitle</label>
+                                <input type="text" id="cnt-about-subtitle" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">About Main Title (H2)</label>
+                                <input type="text" id="cnt-about-title" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Lead Paragraph</label>
+                                <textarea id="cnt-about-lead" class="form-textarea" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Body Text</label>
+                                <textarea id="cnt-about-body" class="form-textarea" rows="4"></textarea>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Highlight Card Title</label>
+                                    <input type="text" id="cnt-about-card-title" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Highlight Card Text</label>
+                                    <input type="text" id="cnt-about-card-text" class="form-input">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="content-tab-missions" class="content-tab-pane" style="display: none;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                                <p style="font-size: 0.85rem; color: var(--adm-text-muted);">Manage the core focus mission cards:</p>
+                                <button type="button" class="btn-primary-action" id="add-new-mission-btn"><i class="fa-solid fa-plus"></i> Add Mission</button>
+                            </div>
+                            <div id="missions-list-container" style="display: flex; flex-direction: column; gap: 16px;">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <div id="content-tab-approach" class="content-tab-pane" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label">Section Title</label>
+                                <input type="text" id="cnt-approach-title" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Intro Text</label>
+                                <textarea id="cnt-approach-intro" class="form-textarea" rows="2"></textarea>
+                            </div>
+                            <div id="approach-steps-container" style="display: flex; flex-direction: column; gap: 16px;">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <div id="content-tab-contact" class="content-tab-pane" style="display: none;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Contact Desk Phone</label>
+                                    <input type="text" id="cnt-contact-phone" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Contact Desk Email</label>
+                                    <input type="email" id="cnt-contact-email" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Registered Office Address</label>
+                                    <input type="text" id="cnt-contact-address" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Operating Support Hours</label>
+                                    <input type="text" id="cnt-contact-hours" class="form-input" placeholder="e.g. Mon - Sat: 9:00 AM - 6:00 PM (IST)">
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px;">
+                                <div class="form-group">
+                                    <label class="form-label">Volunteer Section Heading</label>
+                                    <input type="text" id="cnt-volunteer-title" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Volunteer Section Description</label>
+                                    <input type="text" id="cnt-volunteer-text" class="form-input">
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 24px 0 12px;">
+                                <h4 style="color: var(--adm-text-main); margin: 0;"><i class="fa-solid fa-circle-question text-primary"></i> Frequently Asked Questions (FAQs)</h4>
+                                <button type="button" class="btn-primary-action" id="add-new-faq-btn"><i class="fa-solid fa-plus"></i> Add FAQ</button>
+                            </div>
+                            <div id="faqs-list-container" style="display: flex; flex-direction: column; gap: 14px;">
+                                <!-- Rendered dynamically -->
+                            </div>
+                        </div>
+
+                        <div id="content-tab-donation" class="content-tab-pane" style="display: none;">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Beneficiary Name</label>
+                                    <input type="text" id="cnt-donation-beneficiary" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">UPI ID</label>
+                                    <input type="text" id="cnt-donation-upi" class="form-input">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Donation Section Heading</label>
+                                <input type="text" id="cnt-donation-title" class="form-input">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Donation Section Intro</label>
+                                <textarea id="cnt-donation-intro" class="form-textarea" rows="3"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Funds Allocation Breakdown (One per line)</label>
+                                <textarea id="cnt-donation-allocations" class="form-textarea" rows="4"></textarea>
+                            </div>
+
+                            <h4 style="margin: 24px 0 14px; color: var(--adm-text-main);"><i class="fa-solid fa-building-columns text-accent"></i> Official Bank Transfer Details</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                                <div class="form-group">
+                                    <label class="form-label">Bank Account Name</label>
+                                    <input type="text" id="cnt-bank-name" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bank Account Number</label>
+                                    <input type="text" id="cnt-bank-acc" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">IFSC Code</label>
+                                    <input type="text" id="cnt-bank-ifsc" class="form-input">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Bank & Branch Name</label>
+                                    <input type="text" id="cnt-bank-branch" class="form-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 5. INQUIRIES & MESSAGES INBOX VIEW -->
+                <section class="admin-view" id="view-messages">
+                    <div class="dash-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h3><i class="fa-solid fa-inbox text-primary"></i> Contact Messages & Volunteer Leads</h3>
+                                <p style="font-size: 0.8rem; color: var(--adm-text-muted);">Incoming requests submitted via the public contact form</p>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <select id="messages-filter-status" class="form-select" style="width: 140px;">
+                                    <option value="">All Statuses</option>
+                                    <option value="unread">Unread Only</option>
+                                    <option value="read">Read</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="adm-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sender Name</th>
+                                        <th>Email Address</th>
+                                        <th>Subject</th>
+                                        <th>Date Received</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="messages-table-tbody">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 6. SUBSCRIBERS VIEW -->
+                <section class="admin-view" id="view-subscribers">
+                    <div class="dash-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h3><i class="fa-solid fa-users text-accent"></i> Newsletter Subscribers</h3>
+                                <p style="font-size: 0.8rem; color: var(--adm-text-muted);">Email subscribers from website footer and campaigns</p>
+                            </div>
+                            <button class="btn-primary-action" id="export-subscribers-csv-btn">
+                                <i class="fa-solid fa-file-csv"></i> Export CSV
+                            </button>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="adm-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Subscriber Email</th>
+                                        <th>Subscription Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="subscribers-table-tbody">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 7. MEDIA & UPLOADS VIEW -->
+                <section class="admin-view" id="view-media">
+                    <div class="dash-panel">
+                        <div class="panel-header">
+                            <div>
+                                <h3><i class="fa-solid fa-images text-warning"></i> Media & Image Upload Center</h3>
+                                <p style="font-size: 0.8rem; color: var(--adm-text-muted);">Upload images for blog covers, mission photos, or banners</p>
+                            </div>
+                        </div>
+
+                        <!-- Dropzone -->
+                        <div id="media-dropzone" style="border: 2px dashed var(--adm-border); border-radius: var(--adm-radius-md); padding: 40px; text-align: center; background: var(--adm-surface-card); cursor: pointer; transition: all 0.2s;">
+                            <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.5rem; color: var(--adm-primary); margin-bottom: 12px;"></i>
+                            <h4 style="margin-bottom: 6px;">Drag & Drop Image Here or Click to Browse</h4>
+                            <p style="font-size: 0.82rem; color: var(--adm-text-muted);">Supports PNG, JPG, WebP, SVG (Max 10MB)</p>
+                            <input type="file" id="media-file-input" accept="image/*" style="display: none;">
+                        </div>
+
+                        <div style="margin-top: 30px;">
+                            <h4 style="margin-bottom: 16px;">Quick Presets & Default Assets</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 16px;" id="media-gallery-grid">
+                                <div style="background: var(--adm-surface-card); border: 1px solid var(--adm-border); border-radius: 8px; padding: 12px; text-align: center;">
+                                    <img src="logo.png" style="height: 60px; margin: 0 auto 10px; object-fit: contain;">
+                                    <div style="font-size: 0.8rem; font-weight: 600;">logo.png</div>
+                                    <button class="btn-action copy-link-btn" data-url="/logo.png" style="width: 100%; margin-top: 8px; font-size: 0.75rem;">Copy URL</button>
+                                </div>
+                                <div style="background: var(--adm-surface-card); border: 1px solid var(--adm-border); border-radius: 8px; padding: 12px; text-align: center;">
+                                    <img src="qr-code.png" style="height: 60px; margin: 0 auto 10px; object-fit: contain;">
+                                    <div style="font-size: 0.8rem; font-weight: 600;">qr-code.png</div>
+                                    <button class="btn-action copy-link-btn" data-url="/qr-code.png" style="width: 100%; margin-top: 8px; font-size: 0.75rem;">Copy URL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 8. SETTINGS & SECURITY VIEW -->
+                <section class="admin-view" id="view-settings">
+                    <div style="max-width: 600px;">
+                        <div class="dash-panel">
+                            <div class="panel-header">
+                                <h3><i class="fa-solid fa-lock text-danger"></i> Update Admin Password</h3>
+                            </div>
+                            <form id="change-password-form">
+                                <div class="form-group">
+                                    <label class="form-label">Current Password</label>
+                                    <input type="password" id="pwd-current" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">New Password (Min 6 characters)</label>
+                                    <input type="password" id="pwd-new" class="form-input" required minlength="6">
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Confirm New Password</label>
+                                    <input type="password" id="pwd-confirm" class="form-input" required minlength="6">
+                                </div>
+                                <button type="submit" class="btn-primary-action" id="pwd-save-btn">
+                                    <i class="fa-solid fa-key"></i> Update Password
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Create / Edit Blog Article -->
+    <div class="adm-modal-backdrop" id="blog-modal">
+        <div class="adm-modal">
+            <div class="modal-header">
+                <h3 id="blog-modal-title">Write New Blog Article</h3>
+                <button class="modal-close-btn" id="close-blog-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="blog-editor-form">
+                    <input type="hidden" id="blog-edit-id">
+                    
+                    <div class="form-group">
+                        <label class="form-label">Article Title <strong class="text-danger">*</strong></label>
+                        <input type="text" id="bm-title" class="form-input" placeholder="e.g. 15,000 Saplings Planted Across Villages" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">URL Slug (Auto-generated if empty)</label>
+                            <input type="text" id="bm-slug" class="form-input" placeholder="e.g. 15000-saplings-planted">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Category</label>
+                            <select id="bm-category" class="form-select">
+                                <option value="Environment">Environment</option>
+                                <option value="Education">Education</option>
+                                <option value="Child Mental Health">Child Mental Health</option>
+                                <option value="Farmer Welfare">Farmer Welfare</option>
+                                <option value="General">General</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Author Name</label>
+                            <input type="text" id="bm-author" class="form-input" value="Dagar Editorial Team">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Publish Date</label>
+                            <input type="date" id="bm-date" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Estimated Read Time</label>
+                            <input type="text" id="bm-readtime" class="form-input" placeholder="4 min read">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Cover Image URL (or upload below)</label>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="bm-cover" class="form-input" placeholder="https://images.unsplash.com/...">
+                            <button type="button" class="btn-view-site" id="bm-upload-btn"><i class="fa-solid fa-upload"></i> Upload</button>
+                            <input type="file" id="bm-file-input" accept="image/*" style="display: none;">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Excerpt / Short Summary <strong class="text-danger">*</strong></label>
+                        <textarea id="bm-excerpt" class="form-textarea" rows="2" placeholder="Brief 1-2 sentence teaser for search results and previews..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Full Article Content (HTML / Rich Format) <strong class="text-danger">*</strong></label>
+                        <div class="wysiwyg-toolbar">
+                            <button type="button" class="tb-btn" data-tag="h3"><strong>H3</strong></button>
+                            <button type="button" class="tb-btn" data-tag="b"><strong>B</strong></button>
+                            <button type="button" class="tb-btn" data-tag="i"><em>I</em></button>
+                            <button type="button" class="tb-btn" data-tag="blockquote"><i class="fa-solid fa-quote-left"></i> Quote</button>
+                            <button type="button" class="tb-btn" data-tag="ul"><i class="fa-solid fa-list-ul"></i> List</button>
+                            <button type="button" class="tb-btn" data-tag="p">Paragraph</button>
+                        </div>
+                        <textarea id="bm-content" class="form-textarea" rows="8" placeholder="Write rich article content here..." required style="border-radius: 0 0 var(--adm-radius-sm) var(--adm-radius-sm);"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Tags (Comma separated)</label>
+                        <input type="text" id="bm-tags" class="form-input" placeholder="Environment, TreePlantation, Youth">
+                    </div>
+
+                    <div style="display: flex; gap: 20px; align-items: center; margin-top: 10px;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" id="bm-featured" style="accent-color: var(--adm-primary);">
+                            <span>Feature this article on Homepage & Hero</span>
+                        </label>
+                        <div style="display: flex; align-items: center; gap: 8px;">
+                            <label class="form-label" style="margin: 0;">Status:</label>
+                            <select id="bm-status" class="form-select" style="width: 140px;">
+                                <option value="published">Published</option>
+                                <option value="draft">Draft</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Post-Specific SEO Section -->
+                    <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--adm-border);">
+                        <h4 style="margin-bottom: 12px; font-size: 0.95rem; color: var(--adm-accent);">
+                            <i class="fa-solid fa-magnifying-glass-chart"></i> Article SEO Meta Overrides (Optional)
+                        </h4>
+                        <div class="form-group">
+                            <label class="form-label">SEO Meta Title</label>
+                            <input type="text" id="bm-seo-title" class="form-input" placeholder="Custom SEO Title for Google">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">SEO Meta Description</label>
+                            <textarea id="bm-seo-desc" class="form-textarea" rows="2" placeholder="Custom SEO Description for Google"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-view-site" id="cancel-blog-btn">Cancel</button>
+                <button type="button" class="btn-primary-action" id="save-blog-post-btn">
+                    <i class="fa-solid fa-check"></i> Save & Publish Article
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: View Inquiries / Messages -->
+    <div class="adm-modal-backdrop" id="msg-modal">
+        <div class="adm-modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3>Message Details</h3>
+                <button class="modal-close-btn" id="close-msg-modal">&times;</button>
+            </div>
+            <div class="modal-body" id="msg-modal-body">
+                <!-- Dynamically filled -->
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="msg-reply-link" class="btn-primary-action" target="_blank">
+                    <i class="fa-solid fa-reply"></i> Reply via Email
+                </a>
+                <button type="button" class="btn-view-site" id="close-msg-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="adm-toast-container" id="toast-container"></div>
+
+    <!-- Admin Logic Script -->
+    <script src="admin.js"></script>
+</body>
+</html>

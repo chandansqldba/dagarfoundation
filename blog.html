@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Read inspiring stories, field updates, environmental reports, and educational articles from the grassroots teams at Dagar Foundation.">
+    <meta name="keywords" content="Dagar Foundation blog, NGO articles, afforestation news, social welfare stories, farmer education">
+    <meta name="author" content="Dagar Foundation">
+    <link rel="canonical" href="https://www.dagarfoundation.org/blog.html">
+    <title>Insights & Stories Blog | Dagar Foundation</title>
+    
+    <!-- Favicon Links -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/logo.png">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* Blog Specific Styles */
+        .blog-hero {
+            background: linear-gradient(135deg, rgba(27, 94, 32, 0.95), rgba(46, 125, 50, 0.85)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1600&q=80') center/cover;
+            padding: 120px 0 60px;
+            color: #ffffff;
+            text-align: center;
+        }
+        .blog-hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 14px;
+            font-family: var(--font-secondary);
+        }
+        .blog-hero p {
+            max-width: 650px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            opacity: 0.92;
+        }
+        
+        .blog-search-bar {
+            max-width: 580px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+        }
+        .blog-search-bar input {
+            width: 100%;
+            background: #ffffff;
+            border-radius: 50px;
+            padding: 16px 54px 16px 24px;
+            font-size: 1rem;
+            color: var(--neutral-dark);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .blog-search-bar input:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+        .blog-search-bar button {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            background: var(--primary);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+        .blog-search-bar button:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Category Filters */
+        .category-filters-wrapper {
+            padding: 30px 0 10px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .cat-pill {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            color: var(--neutral-body);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-sm);
+        }
+        .cat-pill:hover, .cat-pill.active {
+            background: var(--primary);
+            color: #ffffff;
+            border-color: var(--primary);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-primary);
+        }
+
+        /* Featured Article Card */
+        .featured-blog-section {
+            padding: 40px 0 20px;
+        }
+        .featured-card {
+            background: #ffffff;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .featured-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        .featured-card-img {
+            width: 100%;
+            height: 100%;
+            min-height: 340px;
+            object-fit: cover;
+        }
+        .featured-card-body {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--secondary-light);
+            color: var(--secondary);
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 14px;
+            width: fit-content;
+        }
+        .featured-card-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 14px;
+            color: var(--neutral-dark);
+            font-family: var(--font-secondary);
+        }
+        .featured-card-excerpt {
+            color: var(--neutral-body);
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .blog-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+        .blog-meta-row i {
+            color: var(--primary);
+        }
+
+        /* Blog Grid */
+        .blog-grid-section {
+            padding: 40px 0 80px;
+        }
+        .blog-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 30px;
+        }
+        .blog-item-card {
+            background: #ffffff;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+        }
+        .blog-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-light);
+        }
+        .blog-thumb-wrap {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        .blog-thumb-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .blog-item-card:hover .blog-thumb-img {
+            transform: scale(1.05);
+        }
+        .blog-cat-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(4px);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .blog-item-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .blog-item-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 10px;
+            color: var(--neutral-dark);
+            font-family: var(--font-secondary);
+        }
+        .blog-item-excerpt {
+            font-size: 0.92rem;
+            color: var(--neutral-body);
+            line-height: 1.6;
+            margin-bottom: 18px;
+            flex: 1;
+        }
+        .blog-item-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+            font-size: 0.85rem;
+        }
+        .read-more-link {
+            color: var(--primary);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s;
+        }
+        .read-more-link:hover {
+            gap: 10px;
+            color: var(--primary-dark);
+        }
+
+        /* Single Post Full View Modal */
+        .post-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(13, 19, 26, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+        .post-modal-backdrop.active {
+            display: flex;
+            justify-content: center;
+        }
+        .single-post-container {
+            background: #ffffff;
+            border-radius: var(--border-radius-lg);
+            max-width: 860px;
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            position: relative;
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.96) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .post-close-btn {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            border: none;
+            z-index: 20;
+            transition: background 0.2s;
+        }
+        .post-close-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+        .single-post-hero-img {
+            width: 100%;
+            max-height: 420px;
+            object-fit: cover;
+        }
+        .single-post-content {
+            padding: 44px;
+        }
+        .single-post-category {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        .single-post-title {
+            font-size: 2.4rem;
+            font-weight: 800;
+            line-height: 1.25;
+            color: var(--neutral-dark);
+            margin-bottom: 16px;
+            font-family: var(--font-secondary);
+        }
+        .single-post-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 24px;
+            margin-bottom: 28px;
+            border-bottom: 1px solid var(--border-color);
+            color: #64748b;
+            font-size: 0.9rem;
+            flex-wrap: wrap;
+        }
+        .single-post-body {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--neutral-body);
+        }
+        .single-post-body h3 {
+            font-size: 1.6rem;
+            color: var(--neutral-dark);
+            margin: 28px 0 14px;
+            font-family: var(--font-secondary);
+        }
+        .single-post-body p {
+            margin-bottom: 18px;
+        }
+        .single-post-body blockquote {
+            border-left: 4px solid var(--primary);
+            padding: 14px 20px;
+            background: var(--primary-light);
+            font-style: italic;
+            font-size: 1.15rem;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            color: var(--primary-dark);
+        }
+        .single-post-share {
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .share-btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        .share-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .share-btn:hover { opacity: 0.85; }
+        .btn-wa { background: #25D366; }
+        .btn-tw { background: #1DA1F2; }
+        .btn-li { background: #0077b5; }
+        .btn-copy { background: #475569; cursor: pointer; border: none; }
+
+        @media (max-width: 900px) {
+            .featured-card {
+                grid-template-columns: 1fr;
+            }
+            .featured-card-img {
+                height: 240px;
+            }
+            .single-post-content {
+                padding: 24px;
+            }
+            .single-post-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header" id="header">
+        <div class="container header-container">
+            <a href="/" class="logo" id="header-logo">
+                <img src="logo.png" alt="Dagar Foundation Logo" class="logo-img">
+                <span class="logo-text">DAGAR <span class="logo-subtext">FOUNDATION</span></span>
+            </a>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="/" class="nav-link">Home</a></li>
+                    <li><a href="/#about" class="nav-link">About Us</a></li>
+                    <li><a href="/#missions" class="nav-link">Our Missions</a></li>
+                    <li><a href="/#approach" class="nav-link">Our Approach</a></li>
+                    <li><a href="/blog.html" class="nav-link active">Blog & Insights</a></li>
+                    <li><a href="/#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+                <a href="/#donate" class="btn btn-primary btn-donate" id="header-donate-btn">
+                    <span>Donate Now</span>
+                    <i class="fa-solid fa-heart"></i>
+                </a>
+                <a href="/admin" class="btn btn-outline btn-sm" style="margin-left: 8px;" title="Admin CMS Portal">
+                    <i class="fa-solid fa-lock"></i>
+                </a>
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle Navigation">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Blog Hero -->
+        <section class="blog-hero">
+            <div class="container">
+                <span style="background: rgba(255,255,255,0.2); padding: 4px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 12px;">
+                    <i class="fa-solid fa-feather-pointed"></i> Field Stories & Insights
+                </span>
+                <h1 id="blog-hero-heading">Empowering Stories of Change</h1>
+                <p>Read about our afforestation drives, educational breakthroughs, youth vocational programs, and community welfare milestones across India.</p>
+                
+                <div class="blog-search-bar">
+                    <input type="text" id="public-blog-search" placeholder="Search by topic, keyword, or village drive...">
+                    <button type="button" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Filters -->
+        <section style="background: #ffffff; border-bottom: 1px solid var(--border-color);">
+            <div class="container">
+                <div class="category-filters-wrapper" id="category-filters">
+                    <button class="cat-pill active" data-category="">All Topics</button>
+                    <button class="cat-pill" data-category="Environment"><i class="fa-solid fa-leaf"></i> Environment</button>
+                    <button class="cat-pill" data-category="Education"><i class="fa-solid fa-graduation-cap"></i> Education</button>
+                    <button class="cat-pill" data-category="Child Mental Health"><i class="fa-solid fa-brain"></i> Child Mental Health</button>
+                    <button class="cat-pill" data-category="Farmer Welfare"><i class="fa-solid fa-wheat-awn"></i> Farmer Welfare</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Article Spotlight -->
+        <section class="featured-blog-section" id="featured-article-wrap">
+            <div class="container" id="featured-card-container">
+                <!-- Dynamically filled with top featured article -->
+            </div>
+        </section>
+
+        <!-- All Blog Cards Grid -->
+        <section class="blog-grid-section">
+            <div class="container">
+                <div class="section-header text-center" style="margin-bottom: 30px;">
+                    <span class="sub-title">Recent Publications</span>
+                    <h2 class="section-title">Latest Articles & Updates</h2>
+                    <div class="header-line"></div>
+                </div>
+
+                <div class="blog-cards-grid" id="blog-cards-grid">
+                    <!-- Populated via API / JS -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Single Blog Post Modal Overlay -->
+    <div class="post-modal-backdrop" id="single-post-modal">
+        <div class="single-post-container" id="single-post-container">
+            <button class="post-close-btn" id="close-single-post-btn" aria-label="Close article">&times;</button>
+            <img src="" alt="Hero Cover" class="single-post-hero-img" id="sp-cover-img">
+            <div class="single-post-content">
+                <div class="single-post-category" id="sp-category">Environment</div>
+                <h1 class="single-post-title" id="sp-title">Article Title</h1>
+                
+                <div class="single-post-meta">
+                    <span><i class="fa-solid fa-user-pen"></i> By <strong id="sp-author">Editorial Team</strong></span>
+                    <span><i class="fa-regular fa-calendar"></i> <span id="sp-date">Date</span></span>
+                    <span><i class="fa-regular fa-clock"></i> <span id="sp-readtime">4 min read</span></span>
+                    <span><i class="fa-regular fa-eye"></i> <span id="sp-views">0</span> views</span>
+                </div>
+
+                <div class="single-post-body" id="sp-body">
+                    <!-- Full Content HTML -->
+                </div>
+
+                <div class="single-post-share">
+                    <div>
+                        <strong style="color: var(--neutral-dark);"><i class="fa-solid fa-share-nodes"></i> Share this Story:</strong>
+                    </div>
+                    <div class="share-btn-group">
+                        <a href="#" class="share-btn btn-wa" id="share-wa" target="_blank" title="Share on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="#" class="share-btn btn-tw" id="share-tw" target="_blank" title="Share on Twitter / X"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#" class="share-btn btn-li" id="share-li" target="_blank" title="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <button type="button" class="share-btn btn-copy" id="share-copy" title="Copy Article Link"><i class="fa-regular fa-copy"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <a href="/" class="logo logo-white">
+                    <img src="logo.png" alt="Dagar Foundation Logo" class="logo-img">
+                    <span class="logo-text">DAGAR <span class="logo-subtext">FOUNDATION</span></span>
+                </a>
+                <p>Dedicated to creating a brighter, more sustainable, and equitable future through community-driven initiatives in environment, education, welfare, and mental health.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#about">About Us</a></li>
+                    <li><a href="/#missions">Our Missions</a></li>
+                    <li><a href="/blog.html">Blog Hub</a></li>
+                    <li><a href="/#donate">Donate Now</a></li>
+                    <li><a href="/#contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-newsletter">
+                <h4>Stay Updated</h4>
+                <p>Subscribe to our newsletter to receive updates on our recent initiatives and plantation drives.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" required id="newsletter-email" aria-label="Email for Newsletter">
+                    <button type="submit" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+                </form>
+                <div class="newsletter-status" id="newsletter-status-msg"></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container footer-bottom-container">
+                <p>&copy; 2026 Dagar Foundation. All rights reserved. Registered NGO.</p>
+                <p><a href="/admin" style="opacity: 0.7; font-size: 0.85rem;"><i class="fa-solid fa-shield-halved"></i> Admin CMS Portal</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Blog Hub Client Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let allArticles = [];
+            let activeCategory = '';
+
+            const grid = document.getElementById('blog-cards-grid');
+            const featuredContainer = document.getElementById('featured-card-container');
+            const searchInput = document.getElementById('public-blog-search');
+            const catButtons = document.querySelectorAll('.cat-pill');
+            const modal = document.getElementById('single-post-modal');
+            const closeModalBtn = document.getElementById('close-single-post-btn');
+
+            // Fetch blogs from API
+            async function fetchBlogs() {
+                try {
+                    const res = await fetch('/api/blogs');
+                    allArticles = await res.json();
+                    renderArticles();
+                    checkUrlParams();
+                } catch (e) {
+                    console.error('Failed to load articles:', e);
+                }
+            }
+
+            function renderArticles() {
+                const query = (searchInput.value || '').toLowerCase().trim();
+                let filtered = allArticles.filter(a => {
+                    if (activeCategory && a.category !== activeCategory) return false;
+                    if (query) {
+                        return (a.title && a.title.toLowerCase().includes(query)) ||
+                               (a.excerpt && a.excerpt.toLowerCase().includes(query)) ||
+                               (a.tags && a.tags.some(t => t.toLowerCase().includes(query)));
+                    }
+                    return true;
+                });
+
+                // Render Featured Card (first article marked featured or first article overall)
+                if (filtered.length > 0 && !activeCategory && !query) {
+                    const featured = filtered.find(a => a.featured) || filtered[0];
+                    featuredContainer.innerHTML = `
+                        <div class="featured-card">
+                            <img src="${featured.coverImage}" alt="${featured.title}" class="featured-card-img" onerror="this.src='logo.png'">
+                            <div class="featured-card-body">
+                                <span class="featured-badge"><i class="fa-solid fa-star"></i> Featured Story</span>
+                                <h2 class="featured-card-title">${featured.title}</h2>
+                                <p class="featured-card-excerpt">${featured.excerpt}</p>
+                                <div class="blog-meta-row">
+                                    <span><i class="fa-regular fa-calendar"></i> ${featured.date}</span>
+                                    <span><i class="fa-regular fa-clock"></i> ${featured.readTime || '4 min read'}</span>
+                                    <span><i class="fa-solid fa-tag"></i> ${featured.category}</span>
+                                </div>
+                                <div>
+                                    <button class="btn btn-primary open-article-btn" data-slug="${featured.slug}">
+                                        <span>Read Full Story</span>
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    document.getElementById('featured-article-wrap').style.display = 'block';
+                } else {
+                    document.getElementById('featured-article-wrap').style.display = 'none';
+                }
+
+                // Render Grid
+                grid.innerHTML = '';
+                if (filtered.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px;">
+                            <i class="fa-solid fa-magnifying-glass" style="font-size: 3rem; color: #cbd5e1; margin-bottom: 14px;"></i>
+                            <h3>No articles found</h3>
+                            <p style="color: #64748b;">Try adjusting your search terms or selecting another category.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                filtered.forEach(post => {
+                    const card = document.createElement('article');
+                    card.className = 'blog-item-card';
+                    card.innerHTML = `
+                        <div class="blog-thumb-wrap">
+                            <img src="${post.coverImage}" alt="${post.title}" class="blog-thumb-img" onerror="this.src='logo.png'">
+                            <span class="blog-cat-tag">${post.category}</span>
+                        </div>
+                        <div class="blog-item-body">
+                            <h3 class="blog-item-title">${post.title}</h3>
+                            <p class="blog-item-excerpt">${post.excerpt}</p>
+                            <div class="blog-item-footer">
+                                <span style="color: #64748b;"><i class="fa-regular fa-calendar"></i> ${post.date}</span>
+                                <a href="?post=${post.slug}" class="read-more-link open-article-btn" data-slug="${post.slug}">
+                                    <span>Read Story</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+                attachArticleOpenEvents();
+            }
+
+            function attachArticleOpenEvents() {
+                document.querySelectorAll('.open-article-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const slug = btn.getAttribute('data-slug');
+                        openArticleModal(slug);
+                    });
+                });
+            }
+
+            async function openArticleModal(slug) {
+                try {
+                    const res = await fetch(`/api/blogs/${slug}`);
+                    if (!res.ok) throw new Error('Article not found');
+                    const post = await res.json();
+
+                    document.getElementById('sp-cover-img').src = post.coverImage || 'logo.png';
+                    document.getElementById('sp-category').innerText = post.category || 'General';
+                    document.getElementById('sp-title').innerText = post.title;
+                    document.getElementById('sp-author').innerText = post.author || 'Dagar Foundation';
+                    document.getElementById('sp-date').innerText = post.date;
+                    document.getElementById('sp-readtime').innerText = post.readTime || '4 min read';
+                    document.getElementById('sp-views').innerText = (post.views || 1).toLocaleString();
+                    document.getElementById('sp-body').innerHTML = post.content;
+
+                    // Social Share links
+                    const postUrl = window.location.origin + '/blog.html?post=' + encodeURIComponent(post.slug);
+                    const shareText = encodeURIComponent(post.title + ' - Dagar Foundation');
+                    document.getElementById('share-wa').href = `https://api.whatsapp.com/send?text=${shareText}%20${encodeURIComponent(postUrl)}`;
+                    document.getElementById('share-tw').href = `https://twitter.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(postUrl)}`;
+                    document.getElementById('share-li').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`;
+                    
+                    document.getElementById('share-copy').onclick = () => {
+                        navigator.clipboard.writeText(postUrl);
+                        alert('Article link copied to clipboard!');
+                    };
+
+                    // Update URL without page reload
+                    history.pushState(null, post.title, `?post=${post.slug}`);
+                    document.title = (post.seo?.title || post.title) + ' | Dagar Foundation';
+
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                } catch (e) {
+                    console.error('Failed to load article details:', e);
+                }
+            }
+
+            function closeArticleModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                history.pushState(null, 'Insights & Stories Blog | Dagar Foundation', '/blog.html');
+                document.title = 'Insights & Stories Blog | Dagar Foundation';
+            }
+
+            closeModalBtn.addEventListener('click', closeArticleModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeArticleModal();
+            });
+
+            // Filter button clicks
+            catButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    catButtons.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    activeCategory = btn.getAttribute('data-category');
+                    renderArticles();
+                });
+            });
+
+            searchInput.addEventListener('input', renderArticles);
+
+            // Check if URL has ?post=slug
+            function checkUrlParams() {
+                const params = new URLSearchParams(window.location.search);
+                const postSlug = params.get('post');
+                if (postSlug) {
+                    openArticleModal(postSlug);
+                }
+            }
+
+            // Mobile Nav Toggle
+            const mobileToggle = document.getElementById('mobile-nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            if (mobileToggle) {
+                mobileToggle.addEventListener('click', () => {
+                    mobileToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+
+            // Newsletter subscription
+            const newsletterForm = document.getElementById('newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const emailInput = document.getElementById('newsletter-email');
+                    const statusMsg = document.getElementById('newsletter-status-msg');
+                    try {
+                        const res = await fetch('/api/newsletter', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ email: emailInput.value })
+                        });
+                        const data = await res.json();
+                        statusMsg.className = 'newsletter-status success';
+                        statusMsg.innerText = data.message || 'Subscribed successfully!';
+                        statusMsg.style.display = 'block';
+                        emailInput.value = '';
+                    } catch (err) {
+                        statusMsg.className = 'newsletter-status error';
+                        statusMsg.innerText = 'Failed to subscribe. Please try again.';
+                        statusMsg.style.display = 'block';
+                    }
+                });
+            }
+
+            // Initialize
+            fetchBlogs();
+        });
+    </script>
+</body>
+</html>

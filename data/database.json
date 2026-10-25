@@ -1,0 +1,519 @@
+{
+  "admin": {
+    "username": "admin",
+    "passwordHash": "75abc285bfa69a30ee8d5f20694e2f0ff9e8312af5b3bf62a49758ed0f1546ee",
+    "salt": "dagar_secure_salt_2026",
+    "email": "admin@dagarfoundation.org",
+    "lastLogin": "2026-10-25T16:38:34.391Z"
+  },
+  "seo": {
+    "global": {
+      "siteName": "Dagar Foundation",
+      "defaultTitle": "Dagar Foundation | Empowering Communities, Preserving Nature",
+      "defaultDescription": "Dagar Foundation is an NGO committed to environmental safety, education for underprivileged children, empowering the unorganized sector, child mental health, and farmer welfare.",
+      "defaultKeywords": "Dagar Foundation, NGO India, Environmental Safety, Quality Education, Child Mental Health, Farmer Welfare, Charity, Non-profit",
+      "canonicalDomain": "https://www.dagarfoundation.org",
+      "ogImage": "/logo.png",
+      "twitterCard": "summary_large_image",
+      "robots": "index, follow",
+      "schemaOrg": {
+        "@context": "https://schema.org",
+        "@type": "NGO",
+        "name": "Dagar Foundation",
+        "alternateName": "Dagar Social Welfare Foundation",
+        "url": "https://www.dagarfoundation.org",
+        "logo": "https://www.dagarfoundation.org/logo.png",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+91-7827752918",
+          "contactType": "Customer Support",
+          "email": "dagar.co.in@gmail.com",
+          "areaServed": "IN"
+        },
+        "sameAs": [
+          "https://facebook.com",
+          "https://twitter.com",
+          "https://instagram.com",
+          "https://linkedin.com"
+        ]
+      }
+    },
+    "pages": {
+      "home": {
+        "title": "Dagar Foundation | Empowering Communities, Preserving Nature",
+        "description": "Dagar Foundation is a non-governmental organization (NGO) dedicated to environmental safety, education for all, empowering the unorganized sector, child mental health, and farmer's welfare.",
+        "keywords": "Dagar Foundation, NGO, Charity, Environmental Safety, Education, Child Mental Health, Farmer Welfare, India NGO",
+        "canonical": "https://www.dagarfoundation.org/",
+        "ogTitle": "Dagar Foundation | Empowering Communities, Preserving Nature",
+        "ogDescription": "Together for a better tomorrow. Join our active grassroots missions in nature conservation, education, and welfare across India.",
+        "ogImage": "/logo.png",
+        "robots": "index, follow"
+      },
+      "about": {
+        "title": "About Us | Dagar Foundation - Mission & Vision",
+        "description": "Learn about Dagar Foundation, our background, transparent governance, community-led initiatives, and dedication to grassroots societal impact.",
+        "keywords": "about dagar foundation, NGO background, community development, transparent charity India",
+        "canonical": "https://www.dagarfoundation.org/about.html",
+        "ogTitle": "About Dagar Foundation - Creating Lasting Social Impact",
+        "ogDescription": "Discover how Dagar Foundation partners with local communities to create sustainable, equitable futures.",
+        "ogImage": "/logo.png",
+        "robots": "index, follow"
+      },
+      "missions": {
+        "title": "Our Core Missions | Dagar Foundation Initiatives",
+        "description": "Explore our 5 core pillars: Environmental Safety, Education for All, Empowering the Unorganized Sector, Child Mental Health, and Farmer Welfare.",
+        "keywords": "environmental NGO initiatives, free education charity, farmer support programs, child mental health India",
+        "canonical": "https://www.dagarfoundation.org/missions.html",
+        "ogTitle": "Our Missions | Dagar Foundation",
+        "ogDescription": "Explore our focused pillars tackling environmental and social challenges across underprivileged regions.",
+        "ogImage": "/logo.png",
+        "robots": "index, follow"
+      },
+      "approach": {
+        "title": "Our Strategic Approach | Dagar Foundation",
+        "description": "Discover how Dagar Foundation executes sustainable change through community collaboration, transparent auditing, tech innovation, and enduring impact.",
+        "keywords": "NGO methodology, community development approach, sustainable social work India, transparent charity",
+        "canonical": "https://www.dagarfoundation.org/approach.html",
+        "ogTitle": "Our Strategic Approach | Dagar Foundation",
+        "ogDescription": "How we turn community aspirations into long-lasting, transparent, and quantifiable progress.",
+        "ogImage": "/logo.png",
+        "robots": "index, follow"
+      },
+      "blog": {
+        "title": "Insights & Stories Blog | Dagar Foundation",
+        "description": "Read inspiring stories, field updates, environmental reports, and educational articles from the grassroots teams at Dagar Foundation.",
+        "keywords": "dagar foundation blog, NGO articles, afforestation news, social welfare stories, farmer education",
+        "canonical": "https://www.dagarfoundation.org/blog.html",
+        "ogTitle": "Dagar Foundation Blog - Impact Stories & Insights",
+        "ogDescription": "Stories of hope, grassroots change, and sustainable progress from our field workers and communities.",
+        "ogImage": "/logo.png",
+        "robots": "index, follow"
+      },
+      "donate": {
+        "title": "Support & Donate | Dagar Foundation",
+        "description": "Contribute directly via UPI or banking channels. 100% of donations fuel tree plantations, child learning kits, and farmers' assistance.",
+        "keywords": "donate to NGO, UPI donation, support education charity, afforestation funds India",
+        "canonical": "https://www.dagarfoundation.org/donate.html",
+        "ogTitle": "Support Our Cause - Donate to Dagar Foundation",
+        "ogDescription": "Your contribution drives real, measurable change on the ground. Scan UPI or contribute today.",
+        "ogImage": "/qr-code.png",
+        "robots": "index, follow"
+      },
+      "contact": {
+        "title": "Contact Us & Volunteer | Dagar Foundation",
+        "description": "Get in touch with the Dagar Foundation team for partnerships, volunteer opportunities, media inquiries, or general support.",
+        "keywords": "contact dagar foundation, volunteer NGO India, NGO address Delhi, support inquiry",
+        "canonical": "https://www.dagarfoundation.org/contact.html",
+        "ogTitle": "Contact Dagar Foundation",
+        "ogDescription": "Have questions or want to get involved? Send us a message or call our support desk.",
+        "ogImage": "/logo.png",
+        "robots": "index, follow"
+      }
+    }
+  },
+  "content": {
+    "branding": {
+      "siteName": "DAGAR FOUNDATION",
+      "logoUrl": "logo.png",
+      "tagline": "Together for a Better Tomorrow",
+      "email": "dagar.co.in@gmail.com",
+      "phone": "+91-7827752918",
+      "address": "New Delhi, India",
+      "website": "www.dagarfoundation.org",
+      "socials": {
+        "facebook": "https://facebook.com",
+        "twitter": "https://twitter.com",
+        "instagram": "https://instagram.com",
+        "linkedin": "https://linkedin.com",
+        "youtube": "https://youtube.com"
+      }
+    },
+    "hero": {
+      "badge": "Together for a Better Tomorrow",
+      "title": "Shaping a Brighter, More Equitable Future",
+      "description": "We are dedicated to addressing critical societal, environmental, and economic challenges. Through focus on environmental safety, education, and well-being, we build lasting change in underprivileged communities.",
+      "ctaPrimaryText": "Support Our Cause",
+      "ctaPrimaryLink": "#donate",
+      "ctaSecondaryText": "Explore Our Work",
+      "ctaSecondaryLink": "#about"
+    },
+    "stats": [
+      {
+        "id": "stat-trees",
+        "icon": "fa-tree",
+        "number": 15000,
+        "suffix": "+",
+        "label": "Trees Planted"
+      },
+      {
+        "id": "stat-children",
+        "icon": "fa-graduation-cap",
+        "number": 1200,
+        "suffix": "+",
+        "label": "Children Educated"
+      },
+      {
+        "id": "stat-farmers",
+        "icon": "fa-wheat-awn",
+        "number": 850,
+        "suffix": "+",
+        "label": "Farmers Assisted"
+      },
+      {
+        "id": "stat-communities",
+        "icon": "fa-people-roof",
+        "number": 50,
+        "suffix": "+",
+        "label": "Communities Served"
+      }
+    ],
+    "about": {
+      "subTitle": "Who We Are",
+      "title": "About Dagar Foundation",
+      "leadText": "At Dagar Foundation, we are driven by a deep-rooted commitment to creating a brighter, more equitable future for all.",
+      "bodyText": "Founded with a vision of positive change, our non-governmental organization (NGO) is dedicated to addressing critical issues that affect our society, environment, and economy. With a focus on environmental safety, education, and overall well-being, we strive to make a lasting impact in the lives of underprivileged communities.",
+      "cardTitle": "Making an Enduring Impact",
+      "cardText": "We believe that sustained, well-planned efforts are the key to breaking the cycle of poverty and environmental degradation.",
+      "features": [
+        {
+          "title": "Community Driven",
+          "desc": "Working hand-in-hand with locals to create tailored solutions."
+        },
+        {
+          "title": "100% Transparent",
+          "desc": "Ensuring that every contribution directly supports our active missions."
+        }
+      ]
+    },
+    "missions": [
+      {
+        "id": "mission-1",
+        "title": "Environmental Safety",
+        "icon": "fa-leaf",
+        "colorVar": "color-env",
+        "desc": "We believe in preserving our planet for future generations. Dagar Foundation actively works towards environmental safety through awareness campaigns, tree plantation drives, and initiatives to reduce pollution and promote sustainable practices.",
+        "tags": [
+          "#Plantation",
+          "#EcoSafety",
+          "#CleanAir"
+        ]
+      },
+      {
+        "id": "mission-2",
+        "title": "Education for All",
+        "icon": "fa-graduation-cap",
+        "colorVar": "color-edu",
+        "desc": "Education is the cornerstone of empowerment. We are committed to providing quality education to underprivileged children and youth, giving them the tools they need to break the cycle of poverty and reach their full potential.",
+        "tags": [
+          "#UnderprivilegedEdu",
+          "#YouthSkills",
+          "#Literacy"
+        ]
+      },
+      {
+        "id": "mission-3",
+        "title": "Empowering the Unorganized Sector",
+        "icon": "fa-users-gear",
+        "colorVar": "color-sector",
+        "desc": "We understand the challenges faced by those working in the unorganized sector. Through skill development programs, job placement assistance, and advocacy, we empower individuals to secure dignified and sustainable livelihoods.",
+        "tags": [
+          "#Livelihoods",
+          "#SkillDevelopment",
+          "#Placement"
+        ]
+      },
+      {
+        "id": "mission-4",
+        "title": "Child Mental Health",
+        "icon": "fa-brain",
+        "colorVar": "color-mental",
+        "desc": "The mental well-being of our children is a top priority. Dagar Foundation offers support and resources to address the unique mental health needs of young minds, fostering a nurturing environment where they can thrive.",
+        "tags": [
+          "#MentalWellbeing",
+          "#YouthSupport",
+          "#SafeSpaces"
+        ]
+      },
+      {
+        "id": "mission-5",
+        "title": "Farmer's Welfare",
+        "icon": "fa-wheat-awn",
+        "colorVar": "color-farmers",
+        "desc": "Agriculture is the backbone of our nation. We work closely with farmers, providing them with knowledge and resources to improve agricultural productivity, enhance their income, and ensure food security for all.",
+        "tags": [
+          "#Agriculture",
+          "#FarmerSupport",
+          "#FoodSecurity"
+        ]
+      }
+    ],
+    "approach": {
+      "subTitle": "How We Work",
+      "title": "Our Strategic Approach",
+      "intro": "At Dagar Foundation, we believe in a holistic approach to social change. We collaborate with communities, local authorities, and partners to implement effective, sustainable solutions.",
+      "steps": [
+        {
+          "num": "01",
+          "title": "Collaboration",
+          "desc": "We work closely with local communities, authorities, and global partners to align our resources with local needs."
+        },
+        {
+          "num": "02",
+          "title": "Transparency",
+          "desc": "We hold ourselves accountable at every step, providing detailed project reports and tracking resource allocation closely."
+        },
+        {
+          "num": "03",
+          "title": "Innovation",
+          "desc": "We continually evolve our methods, bringing modern technology and innovative practices to environmental safety and farmer support."
+        },
+        {
+          "num": "04",
+          "title": "Enduring Impact",
+          "desc": "We measure success not just by initial output, but by the longevity and sustainability of the improvements we generate."
+        }
+      ]
+    },
+    "donation": {
+      "title": "Your Contribution Drives Direct Change",
+      "intro": "When you donate to the Dagar Foundation, your contribution goes directly towards buying seeds for afforestation, supporting educational kits for children, financing skill training camps, and providing counselling and support systems.",
+      "beneficiary": "Dagar Foundation",
+      "upiId": "7827752918@ptsbi",
+      "qrCode": "qr-code.png",
+      "allocations": [
+        "40% - Environmental Protection & Agriculture Programs",
+        "30% - Education & Youth Skill Development",
+        "20% - Child Mental Health & Counseling Initiatives",
+        "10% - Administrative Support and Local Advocacy"
+      ],
+      "bankDetails": {
+        "accountName": "Dagar Social Welfare Foundation",
+        "accountNumber": "987654321098",
+        "ifscCode": "SBIN0001234",
+        "bankName": "State Bank of India",
+        "branch": "New Delhi Main Branch"
+      }
+    },
+    "contact": {
+      "phone": "+91-7827752918",
+      "email": "dagar.co.in@gmail.com",
+      "address": "New Delhi, Delhi NCR, India",
+      "hours": "Mon - Sat: 9:00 AM - 6:00 PM (IST)",
+      "volunteerTitle": "Volunteer With Us",
+      "volunteerText": "Passionate about environment, education, or mental health? Join our active volunteer network across India.",
+      "faqs": [
+        {
+          "q": "How can I volunteer for tree plantation drives?",
+          "a": "You can submit the contact form with subject 'Volunteering' or message us on WhatsApp. Our field coordination team will invite you to upcoming weekend drives."
+        },
+        {
+          "q": "Are donations to Dagar Foundation tax-exempt?",
+          "a": "Yes, Dagar Foundation is a registered non-profit organization. Formal donation receipts are provided for all financial contributions."
+        },
+        {
+          "q": "Can I visit your active rural education centers?",
+          "a": "Yes, we gladly welcome donors, well-wishers, and educators to visit our community learning hubs with advance scheduling."
+        }
+      ]
+    }
+  },
+  "blogs": [
+    {
+      "id": "blog-1",
+      "slug": "restoring-green-cover-15000-saplings-afforestation",
+      "title": "Restoring Green Cover: Our 15,000 Saplings Afforestation Journey",
+      "category": "Environment",
+      "author": "Environmental Outreach Team",
+      "date": "2026-10-14",
+      "readTime": "4 min read",
+      "coverImage": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80",
+      "excerpt": "How community-led planting drives and native species restoration are turning degraded peri-urban lands into thriving ecological micro-sanctuaries.",
+      "content": "<h3>Reviving Local Ecosystems One Sapling at a Time</h3><p>Deforestation and rapid urban expansion have placed immense strain on our local micro-climates, leading to declining soil quality and diminished groundwater tables. Over the past 18 months, Dagar Foundation brought together local youth, village councils, and environmental experts to plant over 15,000 native saplings including Neem, Peepal, Jamun, and Banyan.</p><blockquote>\"Restoring a forest isn't just about digging holes in the ground; it's about nurturing an entire habitat that supports birds, pollinators, and human breath for decades to come.\"</blockquote><h3>The Miyawaki Urban Forest Method</h3><p>By utilizing dense planting methods adapted to our native arid conditions, our survival rate has surpassed 92%. Dagar Foundation volunteers conduct weekly watering, weeding, and bio-fertilizer cycles, ensuring that these trees mature quickly and self-sustain.</p><h3>How You Can Participate</h3><p>Join our weekend plantation drives or sponsor a cluster of 50 trees. Every contribution makes a tangible, breathable difference to future generations.</p>",
+      "tags": [
+        "Environment",
+        "Afforestation",
+        "ClimateAction",
+        "GreenIndia"
+      ],
+      "views": 439,
+      "featured": true,
+      "status": "published",
+      "seo": {
+        "title": "Restoring Green Cover: 15,000 Saplings Planted | Dagar Foundation",
+        "description": "Discover how Dagar Foundation's community afforestation drive planted 15,000+ native saplings to restore green belts and combat rising temperatures.",
+        "keywords": "afforestation India, tree plantation drive, Dagar Foundation green mission, native saplings",
+        "canonical": "https://www.dagarfoundation.org/blog/restoring-green-cover-15000-saplings-afforestation",
+        "ogImage": "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=1200&q=80"
+      }
+    },
+    {
+      "id": "blog-2",
+      "slug": "bridging-digital-divide-rural-education",
+      "title": "Bridging the Digital Divide: Free Learning Camps for 500+ Rural Students",
+      "category": "Education",
+      "author": "Education Initiatives Desk",
+      "date": "2026-09-28",
+      "readTime": "5 min read",
+      "coverImage": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80",
+      "excerpt": "Bringing solar-powered learning pods and STEM kits to children in unorganized rural pockets, nurturing future innovators and scientists.",
+      "content": "<h3>Empowering Tomorrow's Thinkers Today</h3><p>Access to foundational literacy, numeracy, and digital tools remains deeply unequal between metropolitan hubs and remote villages. Dagar Foundation launched mobile learning kits that bring interactive tablets, science models, and dedicated volunteer tutors directly into village community centers.</p><p>Over 1,200 children have attended our remedial sessions, with more than 500 students mastering basic computing, English phonics, and algorithmic thinking.</p><h3>Holistic Support for Underprivileged Youth</h3><p>Beyond classroom books, we supply backpacks, solar study lamps, and nutritious snacks during evening study circles, ensuring children have both energy and light to complete their homework.</p>",
+      "tags": [
+        "Education",
+        "DigitalLiteracy",
+        "YouthEmpowerment",
+        "STEM"
+      ],
+      "views": 320,
+      "featured": true,
+      "status": "published",
+      "seo": {
+        "title": "Bridging Rural Digital Divide | Dagar Foundation Education",
+        "description": "Learn how Dagar Foundation provides digital learning tablets and STEM education kits to underprivileged children in remote communities.",
+        "keywords": "digital literacy NGO, underprivileged child education India, free learning camps, Dagar Foundation education",
+        "canonical": "https://www.dagarfoundation.org/blog/bridging-digital-divide-rural-education",
+        "ogImage": "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=1200&q=80"
+      }
+    },
+    {
+      "id": "blog-3",
+      "slug": "child-mental-health-breaking-the-stigma",
+      "title": "Nurturing Young Minds: Breaking the Stigma Around Children's Mental Health",
+      "category": "Child Mental Health",
+      "author": "Child Wellness Cell",
+      "date": "2026-09-10",
+      "readTime": "6 min read",
+      "coverImage": "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1200&q=80",
+      "excerpt": "Why emotional resilience, safe listening spaces, and compassionate counseling are essential for children growing up in high-stress environments.",
+      "content": "<h3>Addressing Hidden Struggles</h3><p>Emotional well-being is frequently overlooked in underprivileged communities where daily economic survival takes priority. Children, however, absorb stress, anxiety, and trauma from their surroundings. Dagar Foundation established community safe-spaces and art therapy workshops guided by licensed child counselors.</p><h3>Fostering Emotional Resilience</h3><p>Through storytelling, collaborative painting, and mindfulness breathing, children learn to express fear, sadness, and hope without judgment. Parents are also invited to supportive dialogue sessions that teach positive reinforcement techniques.</p>",
+      "tags": [
+        "MentalHealth",
+        "ChildWelfare",
+        "Wellness",
+        "Counseling"
+      ],
+      "views": 285,
+      "featured": false,
+      "status": "published",
+      "seo": {
+        "title": "Children Mental Health Support in Communities | Dagar Foundation",
+        "description": "Dagar Foundation's specialized counseling programs create safe spaces and emotional resilience for underprivileged children.",
+        "keywords": "child mental health NGO India, art therapy children, emotional wellness, community counseling",
+        "canonical": "https://www.dagarfoundation.org/blog/child-mental-health-breaking-the-stigma",
+        "ogImage": "https://images.unsplash.com/photo-1502086223501-7ea6ecd79368?auto=format&fit=crop&w=1200&q=80"
+      }
+    },
+    {
+      "id": "blog-4",
+      "slug": "sustainable-micro-irrigation-farmer-welfare",
+      "title": "Empowering Soil Stewards: Sustainable Micro-Irrigation for Smallholder Farmers",
+      "category": "Farmer Welfare",
+      "author": "Rural Development Team",
+      "date": "2026-08-22",
+      "readTime": "4 min read",
+      "coverImage": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80",
+      "excerpt": "Equipping marginal farmers with low-cost drip irrigation, soil testing, and direct market access to boost yields by up to 35%.",
+      "content": "<h3>Protecting the Backbone of Our Nation</h3><p>Water scarcity and unpredictable monsoons severely impact smallholder farmers with landholdings under 2 acres. Dagar Foundation collaborated with agronomists to introduce gravity-fed drip irrigation kits that reduce water usage by 60% while doubling fertilizer efficiency.</p><h3>Direct Market Linkages</h3><p>In addition to water conservation, our team organized farmer producer clusters that bypass exploitative intermediaries, enabling growers of pulses, millet, and seasonal vegetables to receive fair market returns.</p>",
+      "tags": [
+        "Agriculture",
+        "FarmerWelfare",
+        "Sustainability",
+        "MicroIrrigation"
+      ],
+      "views": 390,
+      "featured": false,
+      "status": "published",
+      "seo": {
+        "title": "Micro-Irrigation & Farmer Welfare Programs | Dagar Foundation",
+        "description": "Discover how Dagar Foundation supports marginal farmers with sustainable irrigation techniques, soil health testing, and market linkages.",
+        "keywords": "farmer welfare NGO India, micro irrigation, sustainable farming, agricultural support",
+        "canonical": "https://www.dagarfoundation.org/blog/sustainable-micro-irrigation-farmer-welfare",
+        "ogImage": "https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=1200&q=80"
+      }
+    }
+  ],
+  "messages": [
+    {
+      "id": "msg-1792944975326",
+      "name": "Rajesh Srivastava",
+      "email": "rajesh.vexat@gmail.com",
+      "subject": "zxc",
+      "message": "test",
+      "date": "2026-10-25T16:16:15.326Z",
+      "status": "unread"
+    },
+    {
+      "id": "msg-1",
+      "name": "Dr. Ananya Sharma",
+      "email": "ananya.sharma@example.org",
+      "subject": "Volunteer as a Child Psychologist for Weekend Sessions",
+      "message": "Hello Dagar Foundation team, I am a practicing child psychologist based in Delhi NCR. I would love to volunteer my weekends to support your mental health counseling initiatives for young children.",
+      "date": "2026-10-24T10:15:00.000Z",
+      "status": "unread"
+    },
+    {
+      "id": "msg-2",
+      "name": "Ramesh Kumar Verma",
+      "email": "ramesh.verma77@gmail.com",
+      "subject": "Sapling donation for upcoming plantation drive",
+      "message": "We have a nursery near Gurugram and would like to contribute 300 fruit-bearing saplings (Guava, Mango, Amla) for your next village drive. Please let us know the delivery coordination.",
+      "date": "2026-10-23T14:40:00.000Z",
+      "status": "read"
+    }
+  ],
+  "subscribers": [
+    {
+      "id": "sub-1",
+      "email": "priya.nair@outlook.com",
+      "date": "2026-10-22T08:30:00.000Z"
+    },
+    {
+      "id": "sub-2",
+      "email": "vikram.singh@gmail.com",
+      "date": "2026-10-25T11:20:00.000Z"
+    }
+  ],
+  "activityLogs": [
+    {
+      "id": "act-1792946314391-elv2",
+      "timestamp": "2026-10-25T16:38:34.391Z",
+      "action": "Admin login successful: admin",
+      "user": "admin"
+    },
+    {
+      "id": "act-1792945827741-bbga",
+      "timestamp": "2026-10-25T16:30:27.743Z",
+      "action": "Admin login successful: admin",
+      "user": "admin"
+    },
+    {
+      "id": "act-1792944975326-qzrk",
+      "timestamp": "2026-10-25T16:16:15.326Z",
+      "action": "New message received from Rajesh Srivastava (rajesh.vexat@gmail.com)",
+      "user": "Public Visitor"
+    },
+    {
+      "id": "act-1792944864118-xinu",
+      "timestamp": "2026-10-25T16:14:24.118Z",
+      "action": "Admin login successful: admin",
+      "user": "admin"
+    },
+    {
+      "id": "act-1792944841568-i8nd",
+      "timestamp": "2026-10-25T16:14:01.568Z",
+      "action": "Admin login successful: admin",
+      "user": "admin"
+    },
+    {
+      "id": "act-1792944834077-3su2",
+      "timestamp": "2026-10-25T16:13:54.077Z",
+      "action": "Admin login successful: admin",
+      "user": "admin"
+    },
+    {
+      "id": "act-1",
+      "timestamp": "2026-10-25T21:00:00.000Z",
+      "action": "Database initialized with full content & SEO architecture",
+      "user": "System"
+    }
+  ]
+}
