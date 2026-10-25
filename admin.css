@@ -145,12 +145,18 @@ body.admin-body {
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
 }
-.input-with-icon i {
+.input-with-icon > i:first-child,
+.input-with-icon .input-prefix-icon {
     position: absolute;
     left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
     color: var(--adm-text-dim);
     font-size: 0.95rem;
+    pointer-events: none;
+    z-index: 2;
 }
 .input-with-icon input {
     width: 100%;
@@ -166,6 +172,38 @@ body.admin-body {
     border-color: var(--adm-primary);
     box-shadow: 0 0 0 3px var(--adm-primary-glow);
     outline: none;
+}
+.pwd-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--adm-text-dim);
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    z-index: 5;
+    padding: 0;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+.pwd-toggle-btn:hover {
+    color: var(--adm-primary);
+    background: rgba(0, 0, 0, 0.04);
+}
+.pwd-toggle-btn i {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    font-size: 1rem;
+    color: inherit !important;
+    pointer-events: auto !important;
 }
 
 .auth-btn {
