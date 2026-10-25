@@ -4,7 +4,7 @@
     "passwordHash": "75abc285bfa69a30ee8d5f20694e2f0ff9e8312af5b3bf62a49758ed0f1546ee",
     "salt": "dagar_secure_salt_2026",
     "email": "admin@dagarfoundation.org",
-    "lastLogin": "2026-10-25T16:38:34.391Z"
+    "lastLogin": "2026-10-25T16:48:55.098Z"
   },
   "seo": {
     "global": {
@@ -473,6 +473,12 @@
     }
   ],
   "activityLogs": [
+    {
+      "id": "act-1792946935100-mobd",
+      "timestamp": "2026-10-25T16:48:55.101Z",
+      "action": "Admin login successful: admin",
+      "user": "admin"
+    },
     {
       "id": "act-1792946314391-elv2",
       "timestamp": "2026-10-25T16:38:34.391Z",
