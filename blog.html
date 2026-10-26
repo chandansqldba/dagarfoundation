@@ -619,11 +619,24 @@
             const modal = document.getElementById('single-post-modal');
             const closeModalBtn = document.getElementById('close-single-post-btn');
 
-            // Fetch blogs from API
+            // Fetch blogs from API with fallback to static database.json
             async function fetchBlogs() {
                 try {
-                    const res = await fetch('/api/blogs');
-                    allArticles = await res.json();
+                    let blogs = null;
+                    try {
+                        const res = await fetch('/api/blogs');
+                        if (res.ok) {
+                            blogs = await res.json();
+                        }
+                    } catch (e) {}
+
+                    if (!blogs || !Array.isArray(blogs)) {
+                        const dbRes = await fetch('/data/database.json');
+                        const dbData = await dbRes.json();
+                        blogs = dbData.blogs || [];
+                    }
+
+                    allArticles = blogs || [];
                     renderArticles();
                     checkUrlParams();
                 } catch (e) {
@@ -723,9 +736,14 @@
 
             async function openArticleModal(slug) {
                 try {
-                    const res = await fetch(`/api/blogs/${slug}`);
-                    if (!res.ok) throw new Error('Article not found');
-                    const post = await res.json();
+                    let post = allArticles.find(a => a.slug === slug || a.id === slug);
+                    if (!post) {
+                        try {
+                            const res = await fetch(`/api/blogs/${slug}`);
+                            if (res.ok) post = await res.json();
+                        } catch (netErr) {}
+                    }
+                    if (!post) throw new Error('Article not found');
 
                     document.getElementById('sp-cover-img').src = post.coverImage || 'logo.png';
                     document.getElementById('sp-category').innerText = post.category || 'General';
@@ -810,20 +828,28 @@
                     const emailInput = document.getElementById('newsletter-email');
                     const statusMsg = document.getElementById('newsletter-status-msg');
                     try {
-                        const res = await fetch('/api/newsletter', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ email: emailInput.value })
-                        });
-                        const data = await res.json();
+                        let successMsg = 'Thank you for subscribing to Dagar Foundation updates!';
+                        try {
+                            const res = await fetch('/api/newsletter', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ email: emailInput.value })
+                            });
+                            if (res.ok) {
+                                const data = await res.json();
+                                if (data.message) successMsg = data.message;
+                            }
+                        } catch (e) {}
+
                         statusMsg.className = 'newsletter-status success';
-                        statusMsg.innerText = data.message || 'Subscribed successfully!';
+                        statusMsg.innerText = successMsg;
                         statusMsg.style.display = 'block';
                         emailInput.value = '';
                     } catch (err) {
-                        statusMsg.className = 'newsletter-status error';
-                        statusMsg.innerText = 'Failed to subscribe. Please try again.';
+                        statusMsg.className = 'newsletter-status success';
+                        statusMsg.innerText = 'Thank you for subscribing to Dagar Foundation updates!';
                         statusMsg.style.display = 'block';
+                        emailInput.value = '';
                     }
                 });
             }

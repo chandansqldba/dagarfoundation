@@ -166,6 +166,13 @@
                     </div>
                 </div>
                 <div class="header-right">
+                    <div id="static-host-indicator" style="display: none; align-items: center; gap: 6px; background: #ecfdf5; color: #047857; border: 1px solid #a7f3d0; font-size: 0.75rem; font-weight: 600; padding: 4px 12px; border-radius: 20px;">
+                        <i class="fa-solid fa-cloud"></i> <span>GitHub Pages Mode</span>
+                    </div>
+                    <button class="btn-view-site" id="export-database-btn" title="Download updated database.json to commit to GitHub" style="border: 1px solid #16a34a; color: #16a34a; background: #f0fdf4;">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Export database.json</span>
+                    </button>
                     <a href="/" target="_blank" class="btn-view-site">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         <span>Live Site</span>
@@ -183,6 +190,16 @@
 
             <!-- Dynamic Views Container -->
             <div class="admin-content">
+
+                <!-- Static Mode Notification Banner -->
+                <div id="static-mode-banner" style="display: none; background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; padding: 12px 18px; border-radius: 12px; margin-bottom: 24px; font-size: 0.88rem; line-height: 1.5;">
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <strong><i class="fa-solid fa-circle-check"></i> Production GitHub Pages Mode Active:</strong>
+                            You can edit content, write blog articles, and configure SEO. All edits save automatically in your browser. Click <strong>Export database.json</strong> in the top header whenever you want to commit your latest updates directly to your GitHub repository!
+                        </div>
+                    </div>
+                </div>
 
                 <!-- 1. DASHBOARD VIEW -->
                 <section class="admin-view active" id="view-dashboard">

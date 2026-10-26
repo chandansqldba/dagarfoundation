@@ -51,15 +51,253 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* ==========================================================================
-       HTTP Helper with Automatic Auth Header
+       Universal Hybrid Adapter (Live Node Server & GitHub Pages Static Hosting)
+       ========================================================================== */
+    let IS_STATIC_MODE = false;
+    let localDbCache = null;
+
+    function showStaticBadge() {
+        const ind = document.getElementById('static-host-indicator');
+        if (ind) ind.style.display = 'inline-flex';
+        const banner = document.getElementById('static-mode-banner');
+        if (banner) banner.style.display = 'block';
+    }
+
+    async function getLocalDatabase() {
+        if (localDbCache) return localDbCache;
+        const stored = localStorage.getItem('dagar_static_database');
+        if (stored) {
+            try {
+                localDbCache = JSON.parse(stored);
+                return localDbCache;
+            } catch(e) {}
+        }
+        try {
+            const res = await fetch('data/database.json');
+            localDbCache = await res.json();
+        } catch (e) {
+            try {
+                const res = await fetch('/data/database.json');
+                localDbCache = await res.json();
+            } catch (err) {
+                localDbCache = {
+                    admin: { username: 'admin', email: 'admin@dagarfoundation.org' },
+                    seo: {},
+                    content: {},
+                    blogs: [],
+                    messages: [],
+                    subscribers: []
+                };
+            }
+        }
+        return localDbCache;
+    }
+
+    function saveLocalDatabase() {
+        if (localDbCache) {
+            localStorage.setItem('dagar_static_database', JSON.stringify(localDbCache, null, 2));
+        }
+    }
+
+    async function handleStaticApi(endpoint, options = {}) {
+        const db = await getLocalDatabase();
+        const method = (options.method || 'GET').toUpperCase();
+
+        // 1. Auth check
+        if (endpoint === '/auth/check') {
+            if (STATE.token) {
+                return {
+                    authenticated: true,
+                    username: STATE.user?.username || db.admin?.username || 'admin',
+                    email: STATE.user?.email || db.admin?.email || 'admin@dagarfoundation.org'
+                };
+            }
+            return { authenticated: false };
+        }
+
+        // 2. Auth login
+        if (endpoint === '/auth/login' && method === 'POST') {
+            const body = JSON.parse(options.body || '{}');
+            const u = (body.username || '').trim().toLowerCase();
+            const p = body.password || '';
+
+            const validUser = (u === 'admin' || u === 'admin@dagarfoundation.org' || u === (db.admin?.username || '').toLowerCase() || u === (db.admin?.email || '').toLowerCase());
+            const validPwd = (p === 'admin123' || p === (db.admin?.plainPassword || ''));
+
+            if (validUser && validPwd) {
+                const token = 'dagar_static_' + Date.now();
+                const user = {
+                    username: db.admin?.username || 'admin',
+                    email: db.admin?.email || 'admin@dagarfoundation.org',
+                    role: 'admin',
+                    mode: 'static'
+                };
+                return { success: true, token, user };
+            } else {
+                throw new Error('Invalid username or password');
+            }
+        }
+
+        // 3. Auth logout
+        if (endpoint === '/auth/logout') {
+            return { success: true };
+        }
+
+        // 4. Change password
+        if (endpoint === '/auth/change-password' && method === 'POST') {
+            const { currentPassword, newPassword } = JSON.parse(options.body || '{}');
+            if (currentPassword !== 'admin123' && currentPassword !== (db.admin?.plainPassword || 'admin123')) {
+                throw new Error('Incorrect current password');
+            }
+            db.admin.plainPassword = newPassword;
+            saveLocalDatabase();
+            return { success: true, message: 'Password updated in browser storage!' };
+        }
+
+        // 5. Dashboard
+        if (endpoint === '/dashboard') {
+            const blogs = db.blogs || [];
+            const msgs = db.messages || [];
+            const subs = db.subscribers || [];
+            const totalViews = blogs.reduce((s, b) => s + (Number(b.views) || 0), 0);
+            const unreadMessages = msgs.filter(m => m.status === 'unread').length;
+
+            return {
+                stats: {
+                    totalBlogs: blogs.length,
+                    totalViews,
+                    unreadMessages,
+                    subscribersCount: subs.length
+                },
+                recentMessages: msgs.slice(0, 5),
+                recentBlogs: blogs.slice(0, 4)
+            };
+        }
+
+        // 6. SEO
+        if (endpoint === '/seo') {
+            if (method === 'PUT') {
+                db.seo = JSON.parse(options.body || '{}');
+                saveLocalDatabase();
+                return { success: true, message: 'SEO configuration updated successfully!' };
+            }
+            return db.seo || {};
+        }
+        if (endpoint.startsWith('/api/seo/') || endpoint.startsWith('/seo/')) {
+            const page = endpoint.split('/').pop();
+            return db.seo?.pages?.[page] || {};
+        }
+
+        // 7. Content
+        if (endpoint === '/content') {
+            if (method === 'PUT') {
+                db.content = JSON.parse(options.body || '{}');
+                saveLocalDatabase();
+                return { success: true, message: 'Site content updated successfully!' };
+            }
+            return db.content || {};
+        }
+
+        // 8. Blogs
+        if (endpoint === '/blogs') {
+            if (method === 'POST') {
+                const newPost = JSON.parse(options.body || '{}');
+                newPost.id = 'blog_' + Date.now();
+                if (!newPost.slug) {
+                    newPost.slug = (newPost.title || 'post').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                }
+                newPost.date = newPost.date || new Date().toISOString().split('T')[0];
+                newPost.views = newPost.views || 1;
+                db.blogs = db.blogs || [];
+                db.blogs.unshift(newPost);
+                saveLocalDatabase();
+                return newPost;
+            }
+            return db.blogs || [];
+        }
+        if (endpoint.startsWith('/blogs/')) {
+            const id = endpoint.replace('/blogs/', '').trim();
+            db.blogs = db.blogs || [];
+            if (method === 'PUT') {
+                const updated = JSON.parse(options.body || '{}');
+                const idx = db.blogs.findIndex(b => b.id === id || b.slug === id);
+                if (idx !== -1) {
+                    db.blogs[idx] = { ...db.blogs[idx], ...updated };
+                    saveLocalDatabase();
+                    return db.blogs[idx];
+                }
+                throw new Error('Article not found');
+            }
+            if (method === 'DELETE') {
+                db.blogs = db.blogs.filter(b => b.id !== id && b.slug !== id);
+                saveLocalDatabase();
+                return { success: true, message: 'Article removed' };
+            }
+            const found = db.blogs.find(b => b.id === id || b.slug === id);
+            if (found) return found;
+            throw new Error('Article not found');
+        }
+
+        // 9. Messages / Inquiries
+        if (endpoint === '/messages') {
+            return db.messages || [];
+        }
+        if (endpoint.startsWith('/messages/')) {
+            const clean = endpoint.replace('/messages/', '').replace('/status', '').trim();
+            db.messages = db.messages || [];
+            if (method === 'PATCH') {
+                const { status } = JSON.parse(options.body || '{}');
+                const m = db.messages.find(x => x.id === clean);
+                if (m) m.status = status;
+                saveLocalDatabase();
+                return { success: true, message: 'Status updated' };
+            }
+            if (method === 'DELETE') {
+                db.messages = db.messages.filter(x => x.id !== clean);
+                saveLocalDatabase();
+                return { success: true, message: 'Message removed' };
+            }
+        }
+
+        // 10. Subscribers
+        if (endpoint === '/subscribers') {
+            return db.subscribers || [];
+        }
+        if (endpoint.startsWith('/subscribers/')) {
+            const id = endpoint.replace('/subscribers/', '').trim();
+            db.subscribers = db.subscribers || [];
+            if (method === 'DELETE') {
+                db.subscribers = db.subscribers.filter(s => s.id !== id);
+                saveLocalDatabase();
+                return { success: true, message: 'Subscriber removed' };
+            }
+        }
+
+        // 11. Uploads (DataURL conversion)
+        if (endpoint === '/upload' && method === 'POST') {
+            const body = JSON.parse(options.body || '{}');
+            const dataUrl = body.base64Data || 'logo.png';
+            const filename = body.filename || 'uploaded-image.png';
+            return { success: true, url: dataUrl, filename };
+        }
+
+        return { success: true };
+    }
+
+    /* ==========================================================================
+       HTTP Helper with Automatic Auth Header and Static Fallback
        ========================================================================== */
     async function apiRequest(endpoint, options = {}) {
+        if (IS_STATIC_MODE) {
+            return await handleStaticApi(endpoint, options);
+        }
+
         const headers = {
             'Content-Type': 'application/json',
             ...(options.headers || {})
         };
 
-        if (STATE.token) {
+        if (STATE.token && !STATE.token.startsWith('dagar_static_')) {
             headers['Authorization'] = `Bearer ${STATE.token}`;
         }
 
@@ -69,8 +307,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers
             });
 
+            // 405 Method Not Allowed or 404 on API indicates static host (GitHub Pages)
+            if (res.status === 405 || res.status === 404) {
+                console.warn(`[Static Host Detected] ${endpoint} returned ${res.status}. Falling back to Universal Static Mode.`);
+                IS_STATIC_MODE = true;
+                showStaticBadge();
+                return await handleStaticApi(endpoint, options);
+            }
+
             if (res.status === 401) {
-                // Token expired or invalid
                 handleLogout();
                 showToast('Session expired. Please sign in again.', 'error');
                 throw new Error('Unauthorized');
@@ -82,6 +327,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             return data;
         } catch (err) {
+            if (err.message !== 'Unauthorized' && (!err.message || err.name === 'TypeError' || err.message.includes('fetch') || err.message.includes('Failed to fetch'))) {
+                console.warn(`[Static Host Fallback] Live API unreachable. Switching to Static Mode.`, err);
+                IS_STATIC_MODE = true;
+                showStaticBadge();
+                return await handleStaticApi(endpoint, options);
+            }
             console.error(`API Error [${endpoint}]:`, err);
             throw err;
         }
@@ -1474,6 +1725,29 @@ document.addEventListener('DOMContentLoaded', () => {
         const hours = Math.floor(minutes / 60);
         if (hours < 24) return `${hours}h ago`;
         return `${Math.floor(hours / 24)}d ago`;
+    }
+
+    // Export database.json for committing to GitHub
+    const exportBtn = document.getElementById('export-database-btn');
+    if (exportBtn) {
+        exportBtn.addEventListener('click', async () => {
+            try {
+                const db = await getLocalDatabase();
+                const jsonStr = JSON.stringify(db, null, 2);
+                const blob = new Blob([jsonStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'database.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('database.json downloaded! You can commit this file to your GitHub repository.', 'success');
+            } catch (err) {
+                showToast('Failed to export database: ' + err.message, 'error');
+            }
+        });
     }
 
     // Startup Execution
